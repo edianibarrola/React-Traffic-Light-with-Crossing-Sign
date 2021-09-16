@@ -9,7 +9,8 @@
 	"scripts": {
 		"start": "webpack-dev-server --mode development --hot --port 3000 --public $(gp url 3000)",
 		"build": "webpack --mode development",
-		"deploy:github": "node deploy-to-github.js"
+		"deploy:github": "node deploy-to-github.js",
+		"pushall": "git add . && git commit -m'genericpush' && git push"
 	},
 	"author": "Alejandro Sanchez",
 	"license": "ISC",

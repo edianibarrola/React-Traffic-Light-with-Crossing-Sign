@@ -2,14 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var PrettierPlugin = require("prettier-webpack-plugin");
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
-
-const port = 3000;
-let publicUrl = `http://localhost:${port}`;
-if(process.env.GITPOD_WORKSPACE_URL){
-  const [schema, host] = process.env.GITPOD_WORKSPACE_URL.split('://');
-  publicUrl = `${port}-${host}`;
-}
 
 module.exports = {
   entry: [
@@ -17,8 +9,7 @@ module.exports = {
   ],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
-    publicPath: '/'
+    path: path.resolve(__dirname, 'public')
   },
   module: {
     rules: [
@@ -53,8 +44,7 @@ module.exports = {
     contentBase:  './dist',
     hot: true,
     disableHostCheck: true,
-    historyApiFallback: true,
-    public: publicUrl
+    historyApiFallback: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -71,7 +61,7 @@ module.exports = {
         template: 'index.html'
     }),
     new PrettierPlugin({
-      parser: "babel",
+      parser: "babylon",
       printWidth: 80,             // Specify the length of line that the printer will wrap on.
       tabWidth: 4,                // Specify the number of spaces per indentation-level.
       useTabs: true,              // Indent lines with tabs instead of spaces.
@@ -80,6 +70,6 @@ module.exports = {
       jsxBracketSameLine: true,
       semi: true,                 // Print semicolons at the ends of statements.
       encoding: 'utf-8'           // Which encoding scheme to use on files
-    }),
+    })
   ]
 };
